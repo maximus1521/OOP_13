@@ -16,6 +16,7 @@ class Category:
 
 
 class Product:
+    num_of_products = 5
 
     def __init__(self, name, description, price, quantity):
         name: str
@@ -26,3 +27,11 @@ class Product:
         self.description = description
         self.price = float(price)
         self.quantity = quantity
+        Product.num_of_products += 1
+
+
+prod1 = Product('Anchor', "goody", 1002.05, 5)
+prod2 = Product('bollard', 'black', 200.33, 10)
+prod3 = Product('line', 'long', 250.22, 8)
+
+print(Product.num_of_products)
