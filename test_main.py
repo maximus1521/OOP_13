@@ -3,15 +3,34 @@ from main import Category, Product
 
 
 @pytest.fixture()
-def category_ship():
-    return Category('Vega', 'container ship', ['ships', 'barges', 'boats'])
+def category_ships():
+    return Category('ships', 'all kind of ships', ['ship', 'barge', 'boat'])
 
 
-def test_init_category(category_ship):
-    assert category_ship.name == 'Vega'
-    assert category_ship.description == 'container ship'
-    assert category_ship.products == ['ships', 'barges', 'boats']
-    assert category_ship.total_categories == 1
+def test_init_category(category_ships):
+    assert category_ships.name == 'ships'
+    assert category_ships.description == 'all kind of ships'
+    assert category_ships.products == ['ship', 'barge', 'boat']
+
+
+def test_total_categories_count():
+    assert Category.total_categories == 1
+
+    Category('Anchor', "goody", ['prod1', 'prod2', 'prod3'])
+    assert Category.total_categories == 2
+
+    Category('bollard', 'black', ['prod4', 'prod5'])
+    assert Category.total_categories == 3
+
+
+def test_all_products_count():
+    assert Category.all_products == 8
+
+    Category('Anchor', 'goody', ["prod1", "prod2", "prod3"])
+    assert Category.all_products == 11
+
+    Category('bollard', 'black', ['prod4', 'prod5', 'prod6'])
+    assert Category.all_products == 14
 
 
 @pytest.fixture()
@@ -25,12 +44,3 @@ def test_init_product(product1_anchor):
     assert product1_anchor.price == 7000.25
     assert product1_anchor.quantity == 2
 
-
-@pytest.fixture()
-def total_categories_count():
-    return Category('Vega', 'container ship', ['ships', 'barges', 'boats'])
-
-
-def test_categories_count(total_categories_count):
-    assert total_categories_count.total_categories == 1
-    assert total_categories_count.num_of_products == 1
