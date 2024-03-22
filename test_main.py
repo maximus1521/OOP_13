@@ -8,8 +8,8 @@ def category_ships():
 
 
 def test_init_category(category_ships):
-    assert category_ships.name == 'ships'
-    assert category_ships.description == 'all kind of ships'
+    assert category_ships.cat_name == 'ships'
+    assert category_ships.cat_description == 'all kind of ships'
     assert category_ships.products == ['ship', 'barge', 'boat']
 
 
@@ -26,11 +26,15 @@ def test_total_categories_count():
 def test_all_products_count():
     assert Category.all_products == 8
 
-    Category('Anchor', 'goody', ["prod1", "prod2", "prod3"])
-    assert Category.all_products == 11
+    Category('Anchor', 'goody', ['prod4', 'prod5'])
+    assert Category.all_products == 10
 
-    Category('bollard', 'black', ['prod4', 'prod5', 'prod6'])
-    assert Category.all_products == 14
+    Category('bollard', 'black', ['prod6', 'prod7', 'prod8'])
+    assert Category.all_products == 13
+
+
+def test_adding_products():
+    pass
 
 
 @pytest.fixture()
@@ -39,8 +43,18 @@ def product1_anchor():
 
 
 def test_init_product(product1_anchor):
-    assert product1_anchor.name == 'anchor'
-    assert product1_anchor.description == 'deep lying anchor'
+    assert product1_anchor.prod_name == 'anchor'
+    assert product1_anchor.prod_description == 'deep lying anchor'
     assert product1_anchor.price == 7000.25
     assert product1_anchor.quantity == 2
+    #assert product1_anchor.list_product == ['anchor']
+
+
+
+    Product('bollard', 'black', 5000.15, 5)
+    """
+    Testing attribute of Class Product
+    """
+    assert Product.list_product == ['anchor', 'bollard']
+
 
